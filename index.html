@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tronique Alpha – Électronique & Solutions IT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #050c14;
+      --surface:  #0a1622;
+      --surface2: #0e1e2e;
+      --accent:   #00d4ff;
+      --accent2:  #0084a8;
+      --gold:     #f0a500;
+      --text:     #cce8f4;
+      --muted:    #5a7a90;
+      --white:    #ffffff;
+      --radius:   4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRID BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(5,12,20,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,212,255,.12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo .mark {
+      width: 36px; height: 36px;
+      background: var(--accent);
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .nav-logo span {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+    .nav-logo span em { color: var(--accent); font-style: normal; }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg) !important;
+      padding: 8px 20px;
+      clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+      font-weight: 700 !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--white) !important; color: var(--bg) !important; }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1); opacity: .7; }
+      50%      { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0,212,255,.3);
+      padding: 6px 16px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .hero-badge::before, .hero-badge::after {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(44px, 8vw, 96px);
+      font-weight: 700;
+      line-height: .95;
+      letter-spacing: -1px;
+      color: var(--white);
+      animation: fadeUp .8s .15s ease both;
+    }
+    h1 span { color: var(--accent); display: block; }
+
+    .hero-sub {
+      margin-top: 22px;
+      font-size: clamp(14px, 1.8vw, 18px);
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.7;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .hero-btns {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp .8s .45s ease both;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 36px;
+      clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--white); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1px solid rgba(0,212,255,.4);
+      color: var(--accent);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 36px;
+      transition: border-color .2s, color .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--white); transform: translateY(-2px); }
+
+    .hero-stats {
+      margin-top: 64px;
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .8s .6s ease both;
+    }
+
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 5%;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    h2 .accent { color: var(--accent); }
+
+    .divider {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin: 18px 0 40px;
+    }
+
+    /* ─── SERVICES ─── */
+    #services .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .svc-card {
+      background: var(--surface);
+      padding: 44px 36px;
+      border: 1px solid rgba(0,212,255,.08);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .svc-card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
+    .svc-card:hover::before { transform: scaleX(1); }
+
+    .svc-icon {
+      width: 56px; height: 56px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svc-icon svg { width: 100%; height: 100%; }
+
+    .svc-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .svc-card p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .svc-list {
+      margin-top: 20px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .svc-list li {
+      font-size: 13px;
+      color: var(--text);
+      padding-left: 16px;
+      position: relative;
+    }
+    .svc-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ─── VALEURS ─── */
+    #valeurs {
+      background: var(--surface);
+      border-top: 1px solid rgba(0,212,255,.08);
+      border-bottom: 1px solid rgba(0,212,255,.08);
+    }
+
+    #valeurs .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .valeurs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .val-card {
+      text-align: center;
+      padding: 36px 24px;
+      border: 1px solid rgba(0,212,255,.1);
+      background: var(--surface2);
+      transition: border-color .3s;
+    }
+    .val-card:hover { border-color: var(--accent); }
+
+    .val-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .val-card h4 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .val-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── ÉQUIPE ─── */
+    #equipe .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .team-card {
+      background: var(--surface);
+      border: 1px solid rgba(0,212,255,.1);
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s;
+    }
+    .team-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,.35); }
+
+    .team-avatar {
+      width: 80px; height: 80px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--bg);
+    }
+
+    .team-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .team-card .role {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+
+    /* ─── FICHE TECHNIQUE ─── */
+    #fiche {
+      background: var(--surface);
+      border-top: 1px solid rgba(0,212,255,.08);
+    }
+
+    #fiche .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .fiche-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(0,212,255,.06);
+      border: 1px solid rgba(0,212,255,.12);
+    }
+
+    .fiche-row {
+      display: contents;
+    }
+
+    .fiche-key, .fiche-val {
+      padding: 14px 24px;
+      font-size: 13px;
+      background: var(--surface2);
+    }
+
+    .fiche-key {
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 600;
+      border-right: 1px solid rgba(0,212,255,.06);
+    }
+
+    .fiche-val {
+      color: var(--text);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+
+    .ci-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .ci-icon {
+      width: 40px; height: 40px;
+      background: rgba(0,212,255,.1);
+      border: 1px solid rgba(0,212,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .ci-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .ci-val {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .ci-val a { color: var(--accent); text-decoration: none; }
+    .ci-val a:hover { text-decoration: underline; }
+
+    /* ─── FORM ─── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--surface2);
+      border: 1px solid rgba(0,212,255,.15);
+      color: var(--text);
+      padding: 12px 16px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+    }
+    .form-group select option { background: var(--surface2); }
+
+    .form-group textarea { min-height: 110px; }
+
+    .form-submit {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px;
+      clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+      transition: background .2s, transform .15s;
+    }
+    .form-submit:hover { background: var(--white); transform: translateY(-2px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid rgba(0,212,255,.1);
+      padding: 48px 5% 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0,212,255,.08);
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 280px;
+      line-height: 1.7;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(0,212,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: border-color .2s, color .2s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .footer-links h5 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: rgba(0,212,255,.05);
+      border-top: 1px solid rgba(0,212,255,.1);
+      border-bottom: 1px solid rgba(0,212,255,.1);
+      padding: 12px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ticker {
+      display: flex;
+      gap: 80px;
+      white-space: nowrap;
+      animation: ticker 18s linear infinite;
+    }
+
+    .ticker span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .ticker span strong { color: var(--accent); }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .fiche-grid { grid-template-columns: 1fr; }
+      .fiche-key { border-right: none; border-bottom: 1px solid rgba(0,212,255,.06); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="mark">TA</div>
+    <span>TRONIQUE <em>ALPHA</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#valeurs">Valeurs</a></li>
+    <li><a href="#equipe">Équipe</a></li>
+    <li><a href="#fiche">Entreprise</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">Agadir, Maroc — Since 2026</div>
+
+  <h1>
+    Solutions IT<br>
+    <span>&amp; Électronique</span>
+  </h1>
+
+  <p class="hero-sub">
+    TRONIQUE ALPHA, votre partenaire technologique de confiance — vente, maintenance et infrastructure réseaux pour les entreprises marocaines.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#services" class="btn-primary">Nos Services</a>
+    <a href="#contact" class="btn-outline">Nous Contacter</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Collaborateurs</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Pôles d'expertise</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24h</div>
+      <div class="stat-label">Intervention on-site</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">200K</div>
+      <div class="stat-label">MAD Capital social</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span><strong>Cisco</strong> — Solutions Réseaux</span>
+    <span><strong>TP-Link</strong> — Distribution Officielle</span>
+    <span><strong>LAN/WAN</strong> — Architecture IT</span>
+    <span><strong>SAV</strong> — Maintenance Préventive</span>
+    <span><strong>Cloud</strong> — Sauvegarde & Virtualisation</span>
+    <span><strong>Pare-feu</strong> — Sécurité Avancée</span>
+    <!-- duplicated for seamless loop -->
+    <span><strong>Cisco</strong> — Solutions Réseaux</span>
+    <span><strong>TP-Link</strong> — Distribution Officielle</span>
+    <span><strong>LAN/WAN</strong> — Architecture IT</span>
+    <span><strong>SAV</strong> — Maintenance Préventive</span>
+    <span><strong>Cloud</strong> — Sauvegarde & Virtualisation</span>
+    <span><strong>Pare-feu</strong> — Sécurité Avancée</span>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <div class="inner">
+    <p class="section-tag reveal">// 01 — Nos Services</p>
+    <h2 class="reveal">Trois axes <span class="accent">d'expertise</span></h2>
+    <div class="divider reveal"></div>
+
+    <div class="services-grid">
+
+      <div class="svc-card reveal">
+        <div class="svc-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="12" width="48" height="32" rx="2" stroke="#00d4ff" stroke-width="2"/>
+            <rect x="10" y="18" width="36" height="20" rx="1" fill="rgba(0,212,255,.08)" stroke="#00d4ff" stroke-width="1.5"/>
+            <path d="M20 48h16M28 44v4" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="38" cy="22" r="2" fill="#00d4ff"/>
+          </svg>
+        </div>
+        <h3>Vente &amp; Distribution</h3>
+        <p>Fourniture complète de matériel informatique, périphériques et composants électroniques spécialisés.</p>
+        <ul class="svc-list">
+          <li>Matériel informatique & accessoires</li>
+          <li>Solutions réseaux Cisco &amp; TP-Link</li>
+          <li>Composants électroniques spécialisés</li>
+          <li>Logiciels &amp; licences officielles</li>
+        </ul>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 8L44 16v12c0 10-8 18-16 20C20 46 12 38 12 28V16L28 8z" stroke="#00d4ff" stroke-width="2"/>
+            <path d="M22 28l4 4 8-8" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Maintenance &amp; SAV</h3>
+        <p>Diagnostics précis et interventions adaptées pour minimiser les arrêts d'activité de votre entreprise.</p>
+        <ul class="svc-list">
+          <li>Diagnostics &amp; réparations ciblées</li>
+          <li>Maintenance préventive planifiée</li>
+          <li>Support technique on-site</li>
+          <li>Intervention garantie sous 24h</li>
+        </ul>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="18" stroke="#00d4ff" stroke-width="2"/>
+            <circle cx="28" cy="28" r="8" stroke="#00d4ff" stroke-width="1.5"/>
+            <line x1="28" y1="10" x2="28" y2="20" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="28" y1="36" x2="28" y2="46" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="10" y1="28" x2="20" y2="28" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="36" y1="28" x2="46" y2="28" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Solutions IT &amp; Réseaux</h3>
+        <p>Conception et déploiement d'architectures réseau robustes, sécurisées et évolutives.</p>
+        <ul class="svc-list">
+          <li>Architecture LAN/WAN évolutive</li>
+          <li>Pare-feu &amp; sécurité avancée</li>
+          <li>Virtualisation de serveurs</li>
+          <li>Sauvegarde Cloud &amp; continuité</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── VALEURS ─── -->
+<section id="valeurs">
+  <div class="inner">
+    <p class="section-tag reveal">// 02 — Nos Valeurs</p>
+    <h2 class="reveal">Ce qui nous <span class="accent">distingue</span></h2>
+    <div class="divider reveal"></div>
+
+    <div class="valeurs-grid">
+      <div class="val-card reveal">
+        <div class="val-icon">🎯</div>
+        <h4>Qualité</h4>
+        <p>Produits certifiés et garantis. Chaque solution livrée répond aux standards les plus exigeants.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">⚡</div>
+        <h4>Innovation</h4>
+        <p>Technologies de dernière génération pour accompagner la transformation numérique de votre activité.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🚀</div>
+        <h4>Réactivité</h4>
+        <p>Intervention rapide sous 24h. Nous sommes là quand vous en avez besoin, sans délai.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🔒</div>
+        <h4>Fiabilité</h4>
+        <p>Partenaire de confiance pour les entreprises. Votre sérénité est notre priorité absolue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ÉQUIPE ─── -->
+<section id="equipe">
+  <div class="inner">
+    <p class="section-tag reveal">// 03 — Notre Équipe</p>
+    <h2 class="reveal">Une direction <span class="accent">expérimentée</span></h2>
+    <div class="divider reveal"></div>
+
+    <div class="equipe-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">FT</div>
+        <h3>Fatima Ezzahra Talhi</h3>
+        <p class="role">Gérante – Directrice Générale</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">TZ</div>
+        <h3>Taki Zakaria</h3>
+        <p class="role">Directeur Technique</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FICHE TECHNIQUE ─── -->
+<section id="fiche">
+  <div class="inner">
+    <p class="section-tag reveal">// 04 — Fiche Entreprise</p>
+    <h2 class="reveal">Informations <span class="accent">légales</span></h2>
+    <div class="divider reveal"></div>
+
+    <div class="fiche-grid reveal">
+      <div class="fiche-key">Dénomination</div><div class="fiche-val">TRONIQUE ALPHA</div>
+      <div class="fiche-key">Secteur</div><div class="fiche-val">Électronique &amp; Informatique</div>
+      <div class="fiche-key">Date de création</div><div class="fiche-val">15 Avril 2026</div>
+      <div class="fiche-key">Statut juridique</div><div class="fiche-val">SARL</div>
+      <div class="fiche-key">Capital social</div><div class="fiche-val">200 000 MAD</div>
+      <div class="fiche-key">Effectif</div><div class="fiche-val">12 collaborateurs</div>
+      <div class="fiche-key">Gérante</div><div class="fiche-val">Fatima Ezzahra Talhi</div>
+      <div class="fiche-key">Patente</div><div class="fiche-val">78 452 136</div>
+      <div class="fiche-key">Identifiant Fiscal</div><div class="fiche-val">52 148 963</div>
+      <div class="fiche-key">ICE</div><div class="fiche-val">003 256 147 800 045</div>
+      <div class="fiche-key">Adresse</div><div class="fiche-val">Rue Ibn Battouta, Zone Industrielle, Agadir 80000, Maroc</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="inner">
+    <p class="section-tag reveal">// 05 — Contact</p>
+    <h2 class="reveal">Parlons de votre <span class="accent">projet</span></h2>
+    <div class="divider reveal"></div>
+
+    <div class="contact-wrapper">
+      <div class="contact-info reveal">
+
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Adresse</div>
+            <div class="ci-val">Rue Ibn Battouta, Zone Industrielle<br>Agadir 80000, Maroc</div>
+          </div>
+        </div>
+
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Téléphone</div>
+            <div class="ci-val">
+              <a href="tel:0528000000">05 28 00 00 00</a><br>
+              <a href="tel:0625415647">06 25 41 56 47</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-val"><a href="mailto:contact@troniquealpha.ma">contact@troniquealpha.ma</a></div>
+          </div>
+        </div>
+
+        <div class="ci-item">
+          <div class="ci-icon">🌐</div>
+          <div>
+            <div class="ci-label">Site Web</div>
+            <div class="ci-val"><a href="https://www.troniquealpha.ma" target="_blank">www.troniquealpha.ma</a></div>
+          </div>
+        </div>
+
+        <div class="ci-item">
+          <div class="ci-icon">💼</div>
+          <div>
+            <div class="ci-label">Réseaux Sociaux</div>
+            <div class="ci-val">
+              <a href="https://linkedin.com/company/tronique-alpha" target="_blank">LinkedIn</a> &nbsp;|&nbsp;
+              <a href="https://facebook.com/TroniqueAlpha" target="_blank">Facebook</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input type="text" placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Service concerné</label>
+          <select>
+            <option value="">Sélectionnez un service</option>
+            <option>Vente &amp; Distribution</option>
+            <option>Maintenance &amp; SAV</option>
+            <option>Solutions IT &amp; Réseaux</option>
+            <option>Autre demande</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Décrivez votre besoin..."></textarea>
+        </div>
+        <button class="form-submit">Envoyer le message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="display:inline-flex">
+        <div class="mark">TA</div>
+        <span>TRONIQUE <em>ALPHA</em></span>
+      </a>
+      <p>Votre partenaire technologique de confiance pour des solutions innovantes à Agadir et dans tout le Maroc.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="https://linkedin.com/company/tronique-alpha" target="_blank" title="LinkedIn">in</a>
+        <a class="social-btn" href="https://facebook.com/TroniqueAlpha" target="_blank" title="Facebook">f</a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#valeurs">Nos Valeurs</a></li>
+        <li><a href="#equipe">Notre Équipe</a></li>
+        <li><a href="#fiche">Fiche Entreprise</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">Vente &amp; Distribution</a></li>
+        <li><a href="#services">Maintenance &amp; SAV</a></li>
+        <li><a href="#services">Solutions IT &amp; Réseaux</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:0528000000">05 28 00 00 00</a></li>
+        <li><a href="tel:0625415647">06 25 41 56 47</a></li>
+        <li><a href="mailto:contact@troniquealpha.ma">contact@troniquealpha.ma</a></li>
+        <li><a href="https://www.troniquealpha.ma">www.troniquealpha.ma</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Tronique Alpha — SARL — Agadir, Maroc</span>
+    <span>ICE: 003 256 147 800 045 &nbsp;|&nbsp; IF: 52 148 963</span>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
